@@ -1,5 +1,6 @@
 package com.example.cdv
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import androidx.activity.enableEdgeToEdge
@@ -15,6 +16,13 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(amb.root)
+
+        amb.abraBt.setOnClickListener {
+            val anotherIntent: Intent = Intent(this, AnotherActivity::class.java).also{
+                startActivity(it)
+            }
+        }
+
         Log.v(getString(R.string.app_name), "onCreate: Iniciando ciclo de vida completo.") //Inicia
         }
 
