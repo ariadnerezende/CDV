@@ -36,6 +36,17 @@ class MainActivity : AppCompatActivity() {
         telefoneDoisEt.layoutParams = LinearLayout.LayoutParams(MATCH_PARENT, WRAP_CONTENT)
         amb.root.addView(telefoneDoisEt)
 
+        //Assim, não precisa do onRestore separado.
+        savedInstanceState?.apply {
+            getString(VALOR_TELEFONE_UM)?.let {
+                amb.telefoneUmEt.setText(it)
+            }
+            getString(VALOR_TELEFONE_DOIS, "00000000").let {
+                telefoneDoisEt.setText(it)
+            }
+        }
+        Log.v((getString(R.string.app_name)), "onRestoreInstanceState: Restaurando dados de instância.")
+
         amb.abraBt.setOnClickListener {
             val anotherIntent: Intent = Intent(this, AnotherActivity::class.java).also{
                 startActivity(it)
@@ -53,7 +64,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     //onRestore NÃO pode receber um Bundle (parametro) nulo!
-    override fun onRestoreInstanceState(savedInstanceState: Bundle) {
+    /*override fun onRestoreInstanceState(savedInstanceState: Bundle) {
         super.onRestoreInstanceState(savedInstanceState)
         savedInstanceState.apply {
             getString(VALOR_TELEFONE_UM)?.let {
@@ -64,7 +75,7 @@ class MainActivity : AppCompatActivity() {
             }
         }
         Log.v((getString(R.string.app_name)), "onRestoreInstanceState: Restaurando dados de instância.")
-    }
+    }*/
 
     override fun onStart() {
         super.onStart()
